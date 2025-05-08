@@ -49,14 +49,14 @@ ax2.tick_params(axis='y', labelcolor=mavi)
 ax2.ticklabel_format(style='plain')
 
 # Grafik başlığı
-plt.title('TÜRKİYE BÜYÜKBAŞ HAYVAN SAYILARI (2013-2023)', fontsize=16, fontweight='bold')
+plt.title('TOPLAM BÜYÜBAŞ HAYVAN SAYILARI(2013-2023)', fontsize=16, fontweight='bold')
 
 # X ekseni ayarları
 plt.xticks(yillar, fontsize=10, rotation=45)
 
 # LEJANDı DOĞRU ŞEKİLDE OLUŞTUR
 lines = [sigir_line, toplam_line, manda_line]
-labels = ["SIĞIR (KIRMIZI)", "BÜYÜKBAŞ TOPLAM (YEŞİL)", "MANDA (MAVİ)"]
+labels = ["SIĞIR ", "BÜYÜKBAŞ TOPLAM ", "MANDA "]
 
 # Lejandı grafiğin altına yerleştir
 plt.figlegend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 0.05),

@@ -34,7 +34,7 @@ axs[0].fill_between(df['Yıl'], df['Toplam Arılı Kovan (Adet)'],
                    color=colors[0], alpha=0.25)
 line1 = axs[0].plot(df['Yıl'], df['Toplam Arılı Kovan (Adet)'], 
                    color=colors[0], linewidth=3, marker='o', markersize=8)[0]
-axs[0].set_title('Toplam Arılı Kovan Sayısı (2013-2023)', fontsize=13, pad=12)
+axs[0].set_title('Toplam Arılı Kovan Sayısı ADET (2013-2023)', fontsize=13, pad=12)
 axs[0].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f'{x/1e6:.1f} M'))
 axs[0].grid(True, linestyle='--', alpha=0.4)
 
@@ -49,7 +49,7 @@ axs[1].fill_between(df['Yıl'], df['Bal Üretimi (TON)'],
                    color=colors[1], alpha=0.25)
 line2 = axs[1].plot(df['Yıl'], df['Bal Üretimi (TON)'], 
                    color=colors[1], linewidth=3, marker='s', markersize=8)[0]
-axs[1].set_title('Bal Üretimi (2013-2023)', fontsize=13, pad=12)
+axs[1].set_title('Bal Üretimi TON (2013-2023)', fontsize=13, pad=12)
 axs[1].grid(True, linestyle='--', alpha=0.4)
 
 # Değer etiketleri
@@ -63,7 +63,7 @@ axs[2].fill_between(df['Yıl'], df['Balmumu (TON)'],
                    color=colors[2], alpha=0.25)
 line3 = axs[2].plot(df['Yıl'], df['Balmumu (TON)'], 
                    color=colors[2], linewidth=3, marker='^', markersize=8)[0]
-axs[2].set_title('Balmumu Üretimi (2013-2023)', fontsize=13, pad=12)
+axs[2].set_title('Balmumu Üretimi TON (2013-2023)', fontsize=13, pad=12)
 axs[2].set_xlabel('Yıl', fontsize=11, labelpad=10)
 axs[2].grid(True, linestyle='--', alpha=0.4)
 
@@ -81,7 +81,7 @@ for ax in axs:
         spine.set_color('#d5d5d5')
 
 # Ana başlık
-fig.suptitle('TÜRKİYE ARICILIK VERİLERİ (2013-2023)', 
+fig.suptitle('ARICILIK VERİLERİ (2013-2023)', 
              fontsize=16, y=0.995, weight='bold')
 
 # Kaynak bilgisi
