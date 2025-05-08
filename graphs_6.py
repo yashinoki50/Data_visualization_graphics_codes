@@ -4,7 +4,6 @@ import matplotlib.ticker as ticker
 import numpy as np
 from matplotlib import rcParams
 
-# Veriler
 data = {
     'Yıl': [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
     'Toplam Arılı Kovan (Adet)': [6641348, 7082732, 7748287, 7900364, 7991072, 8108424, 8128360, 8179418, 8733394, 8984676, 9224881],
@@ -14,21 +13,17 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Stil ayarları
 rcParams['font.family'] = 'DejaVu Sans'
 rcParams['axes.titleweight'] = 'bold'
 rcParams['axes.labelweight'] = 'bold'
-background_color = '#edeae5'  # Belirlediğiniz arka plan rengi
+background_color = '#edeae5'  
 
-# Renk paleti
 colors = ['#3498db', '#e74c3c', '#2ecc71']
 
-# 3 ayrı grafik
 fig, axs = plt.subplots(3, 1, figsize=(14, 15), facecolor=background_color)
 plt.subplots_adjust(hspace=0.5, top=0.92)
 fig.patch.set_facecolor(background_color)
 
-# 1. Grafik: Arılı Kovan
 axs[0].set_facecolor(background_color)
 axs[0].fill_between(df['Yıl'], df['Toplam Arılı Kovan (Adet)'], 
                    color=colors[0], alpha=0.25)
@@ -38,12 +33,10 @@ axs[0].set_title('Toplam Arılı Kovan Sayısı ADET (2013-2023)', fontsize=13, 
 axs[0].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f'{x/1e6:.1f} M'))
 axs[0].grid(True, linestyle='--', alpha=0.4)
 
-# Değer etiketleri (daha iyi konumlandırma)
 for x, y in zip(df['Yıl'], df['Toplam Arılı Kovan (Adet)']):
     axs[0].text(x, y-300000, f'{y/1e6:.1f}M', ha='center', va='top', fontsize=9, 
                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', boxstyle='round,pad=0.2'))
 
-# 2. Grafik: Bal Üretimi
 axs[1].set_facecolor(background_color)
 axs[1].fill_between(df['Yıl'], df['Bal Üretimi (TON)'], 
                    color=colors[1], alpha=0.25)
@@ -52,12 +45,10 @@ line2 = axs[1].plot(df['Yıl'], df['Bal Üretimi (TON)'],
 axs[1].set_title('Bal Üretimi TON (2013-2023)', fontsize=13, pad=12)
 axs[1].grid(True, linestyle='--', alpha=0.4)
 
-# Değer etiketleri
 for x, y in zip(df['Yıl'], df['Bal Üretimi (TON)']):
     axs[1].text(x, y-2000, f'{y/1e3:.0f}K', ha='center', va='top', fontsize=9,
                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', boxstyle='round,pad=0.2'))
 
-# 3. Grafik: Balmumu
 axs[2].set_facecolor(background_color)
 axs[2].fill_between(df['Yıl'], df['Balmumu (TON)'], 
                    color=colors[2], alpha=0.25)
@@ -67,12 +58,10 @@ axs[2].set_title('Balmumu Üretimi TON (2013-2023)', fontsize=13, pad=12)
 axs[2].set_xlabel('Yıl', fontsize=11, labelpad=10)
 axs[2].grid(True, linestyle='--', alpha=0.4)
 
-# Değer etiketleri
 for x, y in zip(df['Yıl'], df['Balmumu (TON)']):
     axs[2].text(x, y-100, f'{y:.0f}', ha='center', va='top', fontsize=9,
                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', boxstyle='round,pad=0.2'))
 
-# Ortak ayarlar
 for ax in axs:
     ax.set_xticks(df['Yıl'])
     ax.set_xticklabels(df['Yıl'], rotation=45)
@@ -80,20 +69,16 @@ for ax in axs:
     for spine in ax.spines.values():
         spine.set_color('#d5d5d5')
 
-# Ana başlık
 fig.suptitle('ARICILIK VERİLERİ (2013-2023)', 
              fontsize=16, y=0.995, weight='bold')
 
-# Kaynak bilgisi
 fig.text(0.1, 0.01, 'Kaynak: Türkiye İstatistik Kurumu (TÜİK) ', 
          ha='center', fontsize=10, color='#555555')
 
-# Normalize edilmiş kombin grafik
 plt.figure(figsize=(14, 8), facecolor=background_color)
 ax = plt.gca()
 ax.set_facecolor(background_color)
 
-# Normalizasyon
 for col, color, marker in zip(['Toplam Arılı Kovan (Adet)', 'Bal Üretimi (TON)', 'Balmumu (TON)'], 
                              colors, ['o', 's', '^']):
     normalized = df[col]/df[col].max()
@@ -101,7 +86,6 @@ for col, color, marker in zip(['Toplam Arılı Kovan (Adet)', 'Bal Üretimi (TON
              marker=marker, markersize=8, label=col.split(' (')[0])
     plt.fill_between(df['Yıl'], normalized, color=color, alpha=0.1)
     
-    # Değer etiketleri (çakışmayı önlemek için farklı yükseklikler)
     offset = 0.02 if col == 'Toplam Arılı Kovan (Adet)' else -0.02 if col == 'Balmumu (TON)' else 0
     for x, y in zip(df['Yıl'], normalized):
         plt.text(x, y+offset, f'{y:.2f}', ha='center', va='bottom' if offset>=0 else 'top', 
@@ -116,7 +100,6 @@ plt.grid(True, linestyle='--', alpha=0.4)
 plt.xticks(df['Yıl'], rotation=45)
 plt.legend(loc='upper left', frameon=False, fontsize=11)
 
-# Eksen çerçevesi
 for spine in ax.spines.values():
     spine.set_color('#d5d5d5')
 
